@@ -11,4 +11,4 @@ from tensorflow import keras
 def init():
     model = tf.keras.models.load_model('/content/model2.h5')
     graph = tf.get_default_graph()
-	return model,graph
+	return graph
