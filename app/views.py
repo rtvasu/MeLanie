@@ -73,7 +73,7 @@ def upload_image():
 
             # return redirect(request.url)
             # with graph.as_default():
-            model = tf.keras.models.load_model('C:/Users/aarti/Desktop/VS Code projects/MeLanie/app/model/model2.h5')
+            model = tf.keras.models.load_model(r'C:\Users\Ria Narang\Desktop\HTN\MeLanie\app\model\model2.h5')
 
             out = model.predict(img)
             maxIndex = np.argmax(out)
@@ -92,4 +92,3 @@ def upload_image():
     return render_template("public/upload_image.html")
     #, user_image = imag
     # e, prediction = response) if (request.method == "POST") else render_template("public/upload_image.html")
-
