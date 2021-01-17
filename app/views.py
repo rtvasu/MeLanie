@@ -1,11 +1,22 @@
 import os
 from app import app
-from .model import load
+# from .model import load
 
 #image libraries
 from PIL import Image
 import cv2
 import numpy as np
+
+# import numpy as np
+import keras.models
+# from keras.models import model_from_json
+# from scipy.misc.pilutil import imread, imshow
+
+import tensorflow as tf
+import efficientnet.tfkeras
+from tensorflow import keras
+
+# global model
 
 from flask import Flask, flash, render_template, request, redirect, url_for
 
@@ -61,17 +72,24 @@ def upload_image():
             print("image")
 
             # return redirect(request.url)
-            var = load.init()
-            with var.as_default():
-                out = model.predict(img)
-                print(out)
-                print(np.argmax(out,axis=1))
+            # with graph.as_default():
+            model = tf.keras.models.load_model('C:/Users/aarti/Desktop/VS Code projects/MeLanie/app/model/model2.h5')
 
-                response = np.array_str(np.argmax(out,axis=1))
-                return response
+            out = model.predict(img)
+            maxIndex = np.argmax(out)
+            print(out)
+            print(maxIndex)
+            
+            if(maxIndex):
+                str1 = "MALIGNANT :" + str(out[0][maxIndex])
+            else:
+                str1 = "BENIGN: " + str(out[0][maxIndex])
+            return str1
+            
 
 
     
     return render_template("public/upload_image.html")
-    #, user_image = image, prediction = response) if (request.method == "POST") else render_template("public/upload_image.html")
+    #, user_image = imag
+    # e, prediction = response) if (request.method == "POST") else render_template("public/upload_image.html")
 
